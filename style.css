@@ -43,3 +43,32 @@ header {
   }
 }
 
+main {
+  & {
+    padding: 32px;
+  }
+
+  & > form {
+    & {
+      display: flex;
+      gap: 30px;
+    }
+    & > div {
+      & {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        height: 100%;
+      }
+      & > input,
+      select {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid black;
+        font-size: 16px;
+        border-radius: 5px;
+      }
+    }
+  }
+}

@@ -17,6 +17,7 @@
 body {
   padding: 0;
   font-size: 16px;
+  width: 99.1%;
   background-color: var(--Bg);
 }
 
@@ -50,7 +51,7 @@ main {
     margin: auto;
   }
 
-  & > button{
+  & > button {
     height: 38.4px;
     width: calc(38.4px * 3);
     background-color: #333333;
@@ -60,6 +61,7 @@ main {
     color: var(--Whiteelement);
     font-weight: bold;
     text-transform: capitalize;
+    cursor: pointer;
   }
 
   & > form {
@@ -91,7 +93,7 @@ main {
   & > #coutry-cards-container {
     & {
       margin: 32px 0 10px 0;
-      
+
       gap: 20px;
       display: flex;
       justify-content: center;
@@ -122,5 +124,30 @@ main {
         }
       }
     }
+  }
+}
+
+main > section#detail {
+  & {
+    max-width: 500px;
+    margin: auto;
+
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  & > h1 {
+    text-transform: capitalize;
+  }
+
+  & > img {
+    width: 100%;
+    height: calc(500px / 2);
+  }
+
+  & > .country-info {
+    align-self: flex-start;
   }
 }

@@ -3,14 +3,16 @@ import { data } from "./data.js";
 var elements = {
     coutryCardsContainer: document.querySelector("#coutry-cards-container"),
     maxPopulation: document.querySelector("#iMaxPopulation"),
-    iPopulation: document.querySelector("#iPopulation")
+    iPopulation: document.querySelector("#iPopulation"),
+    showMore: document.querySelector("#iShowMore")
 }
 
-let mostPopulation = 0;
+function renderCountries(add = 12) {
+    let mostPopulation = 0;
 
-data.map((country, index) => {
-    if (index < 12) {
-        elements.coutryCardsContainer.innerHTML += `
+    data.map((country, index) => {
+        if (index < add) {
+            elements.coutryCardsContainer.innerHTML += `
             <article class="coutry-cards">
                 <img src="${country.flags.png}" alt="${country.name.common} flag">
                 <h1>${country.name.official}</h1>
@@ -20,13 +22,29 @@ data.map((country, index) => {
                     <span>Region: ${country.region}</span>
                 </div>
             </article>
-        `;
+            `;
+        }
+
+        if (country.population > mostPopulation) {
+            mostPopulation = country.population
+        }
+    });
+
+    return { mostPopulation }
+}
+
+const { mostPopulation } = renderCountries();
+
+elements.showMore.addEventListener("click", () => {
+    const Countrychild = {
+        count: elements.coutryCardsContainer.childElementCount,
+        html: elements.coutryCardsContainer.getHTML()
     }
 
-    if (country.population > mostPopulation) {
-        mostPopulation = country.population
-    }
-});
+    elements.coutryCardsContainer.innerHTML = "";
+
+    renderCountries(Countrychild.count + 10);
+})
 
 elements.maxPopulation.innerText += ` ${mostPopulation}`;
 elements.iPopulation.max = mostPopulation;

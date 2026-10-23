@@ -121,6 +121,8 @@ main {
         flex-direction: column;
         flex-basis: 200px;
         align-items: center;
+
+        cursor: pointer;
       }
 
       & > img {

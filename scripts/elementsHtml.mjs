@@ -3,6 +3,7 @@ export let elements = {
     maxPopulation: document.querySelector("#iMaxPopulation"),
     showMore: document.querySelector("#iShowMore"),
     form: {
+        iCountryName: document.querySelector("#iCountryName"),
         iPopulation: document.querySelector("#iPopulation"),
         iRegion: document.querySelector("#iRegion")
     }

@@ -50,10 +50,20 @@ main {
     margin: auto;
   }
 
+  & > button{
+    height: 38.4px;
+    width: calc(38.4px * 3);
+    background-color: #333333;
+    border: none;
+    border-radius: 5px;
+
+    color: var(--Whiteelement);
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+
   & > form {
     & {
-      margin-bottom: 32px;
-      
       display: flex;
       gap: 30px;
     }
@@ -80,8 +90,9 @@ main {
 
   & > #coutry-cards-container {
     & {
+      margin: 32px 0 10px 0;
+      
       gap: 20px;
-
       display: flex;
       justify-content: center;
       flex-direction: row;

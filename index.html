@@ -13,50 +13,33 @@
     </header>
 
     <main>
-      <form action="">
-        <div>
-          <label for="iCountryName">Search by CountryName</label>
-          <input type="text" name="countryName" id="iCountryName" placeholder="Enter Country Name" />
-        </div>
-
-        <div>
-          <label for="iRegion">Search a Region</label>
-          <select name="" id="iRegion">
-            <option value="none" selected>All regions</option>
-          </select>
-        </div>
-
-        <div>
-          <label for="iPopulation">Search by Population</label>
-          <input type="number" name="population" id="iPopulation">
-          <span>Max: </span>
-        </div>
-      </form>
-
-      <section id="coutry-cards-container">
-        <article class="coutry-cards">
-            <img src="" alt="">
-            <h1>country name</h1>
-            <div class="country-info">
-                <div>
-                    <span>Population:</span>
-                    <span>0</span>
-                </div>
-                <div>
-                    <span>Capital:</span>
-                    <span>name</span>
-                </div>
-                <div>
-                    <span>Region:</span>
-                    <span>Region name</span>
-                </div>
-            </div>
-        </article>
+      <section>
+        <form action="">
+          <div>
+            <label for="iCountryName">Search by CountryName</label>
+            <input type="text" name="countryName" id="iCountryName" placeholder="Enter Country Name" />
+          </div>
+          <div>
+            <label for="iRegion">Search a Region</label>
+            <select name="" id="iRegion">
+              <option value="none" selected>All regions</option>
+            </select>
+          </div>
+          <div>
+            <label for="iPopulation">Search by Population</label>
+            <input type="number" name="population" id="iPopulation" min="0">
+            <span id="iMaxPopulation">Max:</span>
+          </div>
+        </form>
       </section>
 
-      <button type="button">show more</button>
+      <section id="coutry-cards-container"></section>
+
+      <section>
+        <button type="button">show more</button>
+      </section>
     </main>
 
-    <script src="./script.js"></script>
+    <script type="module" src="./script.js"></script>
   </body>
 </html>

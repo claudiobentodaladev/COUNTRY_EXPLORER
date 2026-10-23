@@ -19,6 +19,8 @@ export function renderCountries(add = 12) {
             `;
         }
 
+        elements.form.iRegion.innerHTML += `<option value="${country.name.common}">${country.name.common}</option>`;
+
         if (country.population > mostPopulation) {
             mostPopulation = country.population
         }

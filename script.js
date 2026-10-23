@@ -15,4 +15,4 @@ elements.showMore.addEventListener("click", () => {
 })
 
 elements.maxPopulation.innerText += ` ${mostPopulation}`;
-elements.iPopulation.max = mostPopulation;
+elements.form.iPopulation.max = mostPopulation;

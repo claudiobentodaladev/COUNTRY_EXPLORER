@@ -9,7 +9,7 @@ export async function detailHTML(data) {
         </section>
         <section id="detail">
             <h1>${data.name.official}</h1>
-            <img src="" alt="" />
+            <img src="${data.flags.png}" alt="${data.name.common} flag" />
             <div class="country-info">
                 <span>Population: ${data.population}</span>
                 <span>Region: ${data.region}</span>

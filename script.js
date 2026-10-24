@@ -10,7 +10,7 @@ allRegions.map((region) => {
     elements.form.iRegion.innerHTML += `<option value="${region}">${region}</option>`;
 });
 
-countryCardHandler(data[0]);
+countryCardHandler(data);
 
 elements.showMore.addEventListener("click", () => {
     const Countrychild = {

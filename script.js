@@ -27,7 +27,6 @@ function setError(element, input, message) {
     input.setAttribute("aria-invalid", message ? "true" : "false");
 }
 
-// Fills the region dropdown from the data.
 [...new Set(data.map((country) => country.region))].forEach((region) => {
     elements.form.iRegion.insertAdjacentHTML("beforeend", `<option value="${region}">${region}</option>`);
 });
@@ -41,7 +40,7 @@ elements.form.iCountryName.addEventListener("input", () => {
     const error = validateName(value);
 
     setError(elements.errors.name, elements.form.iCountryName, error);
-    if (error) return; // invalid input: the displayed cards do not change
+    if (error) return;
 
     state.name = value;
     state.visible = INITIAL_COUNT;
@@ -59,7 +58,7 @@ elements.form.iPopulation.addEventListener("input", () => {
     const error = validatePopulation(input);
 
     setError(elements.errors.population, input, error);
-    if (error) return; // invalid input: the displayed cards do not change
+    if (error) return;
 
     state.population = input.value === "" ? null : Number(input.value);
     state.visible = INITIAL_COUNT;
@@ -91,7 +90,7 @@ function route() {
         elements.detail.innerHTML = detailHTML(country);
         window.scrollTo(0, 0);
     } else {
-        render(); // restores "no results" / "show more" state of the Main page
+        render();
     }
 }
 

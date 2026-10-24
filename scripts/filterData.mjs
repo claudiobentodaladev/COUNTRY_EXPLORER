@@ -1,11 +1,9 @@
 import { data } from "../data.js";
 
-// Letters (incl. accents such as Å), spaces, hyphens, apostrophes, dots, commas and parentheses.
 const NAME_PATTERN = /^[\p{L}\p{M} '’().,-]*$/u;
 
 export const maxPopulation = Math.max(...data.map((country) => country.population));
 
-// Each validator returns an error message, or "" when the input is valid.
 export function validateName(value) {
     return NAME_PATTERN.test(value)
         ? ""
@@ -27,7 +25,6 @@ export function validatePopulation(input) {
     return "";
 }
 
-// All active filters are combined (AND).
 export function filterData({ name = "", region = "none", population = null }) {
     const term = name.trim().toLowerCase();
 

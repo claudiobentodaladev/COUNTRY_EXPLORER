@@ -1,6 +1,5 @@
 import { elements } from "./elementsHtml.mjs";
 
-// Opening a country = navigating to #/country/<official name>.
 function openCard(event) {
     const card = event.target.closest(".coutry-cards");
     if (!card) return;

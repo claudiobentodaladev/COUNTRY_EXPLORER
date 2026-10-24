@@ -5,7 +5,7 @@ export async function detailHTML(data) {
 
     return `
         <section>
-            <button type="button">back</button>
+            <button id="backButton" type="button">back</button>
         </section>
         <section id="detail">
             <h1>${data.name.official}</h1>

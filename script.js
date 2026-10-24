@@ -22,7 +22,7 @@ elements.showMore.addEventListener("click", () => {
 
     elements.coutryCards.container.innerHTML = "";
 
-    renderCountriesNumber(Countrychild.count + 10);
+    renderCountriesNumber(Countrychild.count + 6);
 })
 
 elements.form.iCountryName.addEventListener("input", () => {

@@ -1,5 +1,3 @@
-import { data } from "../data";
-
 function formattedNames(data) {
     let formatted = "";
 

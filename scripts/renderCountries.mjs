@@ -7,7 +7,7 @@ export function renderCountriesNumber(add = 12) {
 
     data.map((country, index) => {
         if (index < add) {
-            elements.coutryCardsContainer.innerHTML += `
+            elements.coutryCards.container.innerHTML += `
             <article class="coutry-cards">
                 <img src="${country.flags.png}" alt="${country.name.common} flag">
                 <h1>${country.name.official}</h1>
@@ -19,6 +19,7 @@ export function renderCountriesNumber(add = 12) {
             </article>
             `;
         }
+
 
         if (!allRegions.includes(country.region)) {
             allRegions.push(country.region)
@@ -34,7 +35,7 @@ export function renderCountriesNumber(add = 12) {
 
 export function renderCountriesArray(data = []) {
     data.map((country) => {
-        elements.coutryCardsContainer.innerHTML += `
+        elements.coutryCards.container.innerHTML += `
             <article class="coutry-cards">
                 <img src="${country.flags.png}" alt="${country.name.common} flag">
                 <h1>${country.name.official}</h1>

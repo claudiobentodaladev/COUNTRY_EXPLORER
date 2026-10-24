@@ -1,5 +1,8 @@
 export let elements = {
-    coutryCardsContainer: document.querySelector("#coutry-cards-container"),
+    coutryCards: {
+        container: document.querySelector("#coutry-cards-container"),
+        itens: document.querySelectorAll(".coutry-cards")
+    },
     maxPopulation: document.querySelector("#iMaxPopulation"),
     showMore: document.querySelector("#iShowMore"),
     form: {

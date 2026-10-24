@@ -8,7 +8,7 @@ export function filterData(type, inputValue) {
             const regex = new RegExp(/^[a-zA-Z -]*$/);
             if (!regex.test(inputValue)) filteredData = [];
 
-            filteredData = data.filter((country) => country.name.common.toLowerCase().startsWith(inputValue.toLowerCase()));
+            filteredData = data.filter((country) => country.name.common.toLowerCase().startsWith(inputValue.toLowerCase()) || country.name.official.toLowerCase().startsWith(inputValue.toLowerCase()));
             break;
 
         case "region":

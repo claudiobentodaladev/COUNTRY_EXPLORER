@@ -1,9 +1,8 @@
 export function backButtonHandler() {
     document.addEventListener("click", (event) => {
-        const button = event.target.closest("#backButton");
+        if (!event.target.closest("#backButton")) return;
 
-        if (!button) return;
-
-        window.location.reload();
+        // Back to the Main page (filters and cards are kept as they were).
+        location.hash = "";
     });
 }

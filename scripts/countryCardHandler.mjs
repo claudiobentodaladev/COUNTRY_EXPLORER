@@ -1,21 +1,21 @@
-
-import { detailHTML } from "../detail.mjs";
 import { elements } from "./elementsHtml.mjs";
 
-export function countryCardHandler(data) {
-    elements.coutryCards.container.addEventListener("click", async (event) => {
-        const item = event.target.closest(".coutry-cards");
+// Opening a country = navigating to #/country/<official name>.
+function openCard(event) {
+    const card = event.target.closest(".coutry-cards");
+    if (!card) return;
 
-        if (!item) return;
+    location.hash = `#/country/${encodeURIComponent(card.dataset.official)}`;
+}
 
-        const countryName = item.querySelector("h1").textContent;
+export function countryCardHandler() {
+    const container = elements.coutryCards.container;
 
-        const country = data.find(
-            country => country.name.official === countryName
-        );
-
-        if (!country) return;
-
-        elements.main.innerHTML = await detailHTML(country);
+    container.addEventListener("click", openCard);
+    container.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openCard(event);
+        }
     });
 }

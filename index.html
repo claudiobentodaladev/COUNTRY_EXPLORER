@@ -13,11 +13,12 @@
     </header>
 
     <main>
-      <section>
+      <section class="main-view">
         <form action="">
           <div>
             <label for="iCountryName">Search by CountryName</label>
-            <input type="text" name="countryName" id="iCountryName" placeholder="Enter Country Name" />
+            <input type="text" name="countryName" id="iCountryName" placeholder="Enter Country Name" autocomplete="off" aria-describedby="iNameError" />
+            <span class="error-message" id="iNameError" role="alert"></span>
           </div>
           <div>
             <label for="iRegion">Search a Region</label>
@@ -27,17 +28,24 @@
           </div>
           <div>
             <label for="iPopulation">Search by Population</label>
-            <input type="number" name="population" id="iPopulation" min="0">
+            <input type="number" name="population" id="iPopulation" min="0" step="1" aria-describedby="iPopulationError">
             <span id="iMaxPopulation">Max:</span>
+            <span class="error-message" id="iPopulationError" role="alert"></span>
           </div>
         </form>
       </section>
 
-      <section id="coutry-cards-container"></section>
+      <section id="coutry-cards-container" class="main-view"></section>
+      <p id="iNoResults" class="no-results" role="status" hidden>No countries match the filter criteria.</p>
 
-      <section>
+      <section class="main-view">
         <button type="button" id="iShowMore">show more</button>
       </section>
+
+      <section class="detail-view" hidden>
+        <button id="backButton" type="button">back</button>
+      </section>
+      <section id="detail" class="detail-view" hidden></section>
     </main>
 
     <script type="module" src="./script.js"></script>

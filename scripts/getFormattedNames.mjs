@@ -1,20 +1,10 @@
-function formattedNames(data) {
-    let formatted = "";
-
-    data.map((value, index) => {
-        formatted += `${value.name}, `
-
-        if (data.length - 1 === index) {
-            formatted += value.name
-        }
-    })
+function formattedNames(items = []) {
+    return items.map((item) => item.name).join(", ");
 }
 
 export function getFormattedNames(country) {
-    let formattedLanguages, formattedCurrencies = "";
-
-    formattedLanguages = formattedNames(country.languages);
-    formattedCurrencies = formattedNames(country.currencies);
-
-    return { formattedLanguages, formattedCurrencies };
+    return {
+        formattedLanguages: formattedNames(country.languages),
+        formattedCurrencies: formattedNames(country.currencies)
+    };
 }

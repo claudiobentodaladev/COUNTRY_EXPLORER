@@ -1,69 +1,103 @@
-import { renderCountriesNumber, renderCountriesArray } from "./scripts/renderCountries.mjs";
-import { filterData } from "./scripts/filterData.mjs";
+import { renderCountriesArray } from "./scripts/renderCountries.mjs";
+import { filterData, validateName, validatePopulation, maxPopulation } from "./scripts/filterData.mjs";
 import { elements } from "./scripts/elementsHtml.mjs";
 import { countryCardHandler } from "./scripts/countryCardHandler.mjs";
-import { data } from "./data.js";
 import { backButtonHandler } from "./scripts/backButtonHandler.mjs";
+import { detailHTML } from "./detail.mjs";
+import { data } from "./data.js";
 
-const { mostPopulateCountry, allRegions } = renderCountriesNumber();
+const INITIAL_COUNT = 12;
+const SHOW_MORE_COUNT = 10;
 
-allRegions.map((region) => {
-    elements.form.iRegion.innerHTML += `<option value="${region}">${region}</option>`;
+const state = { name: "", region: "none", population: null, visible: INITIAL_COUNT };
+
+/* ---------- Main page ---------- */
+
+function render() {
+    const filtered = filterData(state);
+
+    renderCountriesArray(filtered.slice(0, state.visible));
+
+    elements.noResults.hidden = filtered.length > 0;
+    elements.showMore.hidden = state.visible >= filtered.length;
+}
+
+function setError(element, input, message) {
+    element.textContent = message;
+    input.setAttribute("aria-invalid", message ? "true" : "false");
+}
+
+// Fills the region dropdown from the data.
+[...new Set(data.map((country) => country.region))].forEach((region) => {
+    elements.form.iRegion.insertAdjacentHTML("beforeend", `<option value="${region}">${region}</option>`);
 });
 
-countryCardHandler(data);
-backButtonHandler();
-
-elements.showMore.addEventListener("click", () => {
-    const Countrychild = {
-        count: elements.coutryCards.container.childElementCount,
-        html: elements.coutryCards.container.getHTML()
-    }
-
-    elements.coutryCards.container.innerHTML = "";
-
-    renderCountriesNumber(Countrychild.count + 6);
-})
+elements.maxPopulation.textContent = `Max: ${maxPopulation}`;
+elements.form.iPopulation.max = maxPopulation;
+elements.form.element.addEventListener("submit", (event) => event.preventDefault());
 
 elements.form.iCountryName.addEventListener("input", () => {
-    const value = elements.form.iCountryName.value
+    const value = elements.form.iCountryName.value;
+    const error = validateName(value);
 
-    elements.coutryCards.container.innerHTML = "";
-    elements.form.iRegion.value = "none";
-    elements.form.iPopulation.value = "0";
+    setError(elements.errors.name, elements.form.iCountryName, error);
+    if (error) return; // invalid input: the displayed cards do not change
 
-    if (value == "") renderCountriesNumber();
-    elements.showMore.style.display = "none";
-    renderCountriesArray(filterData("name", value));
+    state.name = value;
+    state.visible = INITIAL_COUNT;
+    render();
 });
+
 elements.form.iRegion.addEventListener("change", () => {
-    const value = elements.form.iRegion.value;
+    state.region = elements.form.iRegion.value;
+    state.visible = INITIAL_COUNT;
+    render();
+});
 
-    elements.coutryCards.container.innerHTML = "";
-    elements.form.iCountryName.value = "";
-    elements.form.iPopulation.value = "";
+elements.form.iPopulation.addEventListener("input", () => {
+    const input = elements.form.iPopulation;
+    const error = validatePopulation(input);
 
-    elements.showMore.style.display = "none";
+    setError(elements.errors.population, input, error);
+    if (error) return; // invalid input: the displayed cards do not change
 
-    if (value === "none") {
-        renderCountriesNumber();
-        elements.showMore.style.display = "block";
-        return;
+    state.population = input.value === "" ? null : Number(input.value);
+    state.visible = INITIAL_COUNT;
+    render();
+});
+
+elements.showMore.addEventListener("click", () => {
+    state.visible += SHOW_MORE_COUNT;
+    render();
+});
+
+/* ---------- Routing: Main page <-> Details page ---------- */
+
+function route() {
+    const match = location.hash.match(/^#\/country\/(.+)$/);
+    let country;
+
+    if (match) {
+        let official = match[1];
+        try { official = decodeURIComponent(official); } catch { /* keep raw value */ }
+        country = data.find((item) => item.name.official === official);
     }
 
-    renderCountriesArray(filterData("region", value));
-});
-elements.form.iPopulation.addEventListener("input", () => {
-    const value = elements.form.iPopulation.value;
+    elements.mainViews.forEach((view) => (view.hidden = !!country));
+    elements.detailViews.forEach((view) => (view.hidden = !country));
 
-    elements.coutryCards.container.innerHTML = "";
-    elements.form.iCountryName.value = "";
-    elements.form.iRegion.value = "none";
+    if (country) {
+        elements.noResults.hidden = true;
+        elements.detail.innerHTML = detailHTML(country);
+        window.scrollTo(0, 0);
+    } else {
+        render(); // restores "no results" / "show more" state of the Main page
+    }
+}
 
-    if (value == "0") renderCountriesNumber();
-    elements.showMore.style.display = "none";
-    renderCountriesArray(filterData("population", Number(value)));
-});
+countryCardHandler();
+backButtonHandler();
+window.addEventListener("hashchange", route);
 
-elements.maxPopulation.innerText += ` ${mostPopulateCountry}`;
-elements.form.iPopulation.max = mostPopulateCountry + 1;
+render();
+route();

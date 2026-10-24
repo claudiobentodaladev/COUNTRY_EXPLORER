@@ -1,50 +1,18 @@
 import { elements } from "./elementsHtml.mjs";
-import { data } from "../data.js";
+import { escapeHtml } from "./escapeHtml.mjs";
 
-export function renderCountriesNumber(add = 12) {
-    let allRegions = [];
-    let mostPopulateCountry = 0;
-
-    data.map((country, index) => {
-        if (index < add) {
-            elements.coutryCards.container.innerHTML += `
-            <article class="coutry-cards">
-                <img src="${country.flags.png}" alt="${country.name.common} flag">
-                <h1>${country.name.official}</h1>
+export function renderCountriesArray(countries = []) {
+    elements.coutryCards.container.innerHTML = countries
+        .map((country) => `
+            <article class="coutry-cards" tabindex="0" data-official="${escapeHtml(country.name.official)}">
+                <img src="${escapeHtml(country.flags.png)}" alt="${escapeHtml(country.name.common)} flag">
+                <h1>${escapeHtml(country.name.official)}</h1>
                 <div class="country-info">
                     <span>Population: ${country.population}</span>
-                    <span>Capital: ${country.capital}</span>
-                    <span>Region: ${country.region}</span>
+                    <span>Capital: ${escapeHtml(country.capital)}</span>
+                    <span>Region: ${escapeHtml(country.region)}</span>
                 </div>
             </article>
-            `;
-        }
-
-
-        if (!allRegions.includes(country.region)) {
-            allRegions.push(country.region)
-        }
-
-        if (country.population > mostPopulateCountry) {
-            mostPopulateCountry = country.population
-        }
-    });
-
-    return { mostPopulateCountry, allRegions }
-}
-
-export function renderCountriesArray(data = []) {
-    data.map((country) => {
-        elements.coutryCards.container.innerHTML += `
-            <article class="coutry-cards">
-                <img src="${country.flags.png}" alt="${country.name.common} flag">
-                <h1>${country.name.official}</h1>
-                <div class="country-info">
-                    <span>Population: ${country.population}</span>
-                    <span>Capital: ${country.capital}</span>
-                    <span>Region: ${country.region}</span>
-                </div>
-            </article>
-        `;
-    });
+        `)
+        .join("");
 }

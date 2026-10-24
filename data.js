@@ -597,7 +597,7 @@ export let data = [
         "region": "Asia",
         "population": 125836021,
         "flags": {
-            "svg": "./assets/japan.svg",
+            "svg": "./assets/Japan.svg",
             "png": "./assets/japan.png"
         },
         "currencies": [

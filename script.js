@@ -2,6 +2,7 @@ import { renderCountriesNumber, renderCountriesArray } from "./scripts/renderCou
 import { filterData } from "./scripts/filterData.mjs";
 import { elements } from "./scripts/elementsHtml.mjs";
 import { countryCardHandler } from "./scripts/countryCardHandler.mjs";
+import { data } from "./data.js";
 
 const { mostPopulateCountry, allRegions } = renderCountriesNumber();
 
@@ -9,7 +10,7 @@ allRegions.map((region) => {
     elements.form.iRegion.innerHTML += `<option value="${region}">${region}</option>`;
 });
 
-countryCardHandler();
+countryCardHandler(data[0]);
 
 elements.showMore.addEventListener("click", () => {
     const Countrychild = {

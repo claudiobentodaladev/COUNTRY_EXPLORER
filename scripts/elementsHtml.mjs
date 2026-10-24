@@ -1,4 +1,5 @@
 export let elements = {
+    main: document.querySelector("main"),
     coutryCards: {
         container: document.querySelector("#coutry-cards-container"),
         itens: document.querySelectorAll(".coutry-cards")
